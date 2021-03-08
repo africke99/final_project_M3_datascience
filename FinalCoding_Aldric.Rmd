@@ -1,0 +1,72 @@
+---
+title: "Final_Project_Coding"
+author: "Aldric Martinez-Olson"
+date: "2/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries}
+library(tidyverse)     # for data cleaning and plotting
+library(gardenR)       # for Lisa's garden data
+library(lubridate)     # for date manipulation
+library(openintro)     # for the abbr2state() function
+library(palmerpenguins)# for Palmer penguin data
+library(maps)          # for map data
+library(ggmap)         # for mapping points on maps
+library(gplots)        # for col2hex() function
+library(RColorBrewer)  # for color palettes
+library(sf)            # for working with spatial data
+library(leaflet)       # for highly customizable mapping
+library(ggthemes)      # for more themes (including theme_map())
+library(plotly)        # for the ggplotly() - basic interactivity
+library(gganimate)     # for adding animation layers to ggplots
+library(transformr)    # for "tweening" (gganimate)
+library(gifski)        # for creating the gif (don't need to load this library every time,but need it installed)
+#library(shiny)         # for creating interactive apps
+theme_set(theme_minimal())
+library(readr)
+```
+
+```{r}
+bird_migration <- read_csv("~/Desktop/bird_migration.csv")
+```
+
+```{r}
+bird_migration1 <- bird_migration %>% 
+  mutate(date2 = date_time) %>% 
+  select(-device_info_serial) %>% 
+  separate(date_time, c("date", "time"), sep = " ") %>% 
+  mutate(date_tag = date) %>% 
+  separate(date_tag,
+           c("Year", "Month", "Day")) %>%
+  mutate(Day = as.numeric(Day)) %>% 
+  filter(bird_name == "Sanne", Month == "01", Day <= 7) %>% 
+  rename(Speed = speed_2d) %>% 
+  mutate(min_lat = min(latitude), #13.88409
+         max_lat = max(latitude), #14.14706	
+         min_long = min(longitude), #-17.0744	
+         max_long = max(longitude)) #-16.75575
+ 
+Sanne <- get_stamenmap(
+    bbox = c(left = -17.0744, bottom = 13.88409, right = -16.75575, top = 14.14706), 
+    maptype = "terrain",
+    zoom = 12)
+
+Sanne_Path_Anim <- ggmap(Sanne) + 
+  geom_path(data = bird_migration1,
+            aes(x = longitude, y = latitude, color = Speed)) +
+  geom_point(data = bird_migration1, 
+             aes(x = longitude, y = latitude), size = 2) +
+  labs(x = "Longitude",
+       y = "Latitude",
+       title = "Sanne's Flight Path off the coast of Joal Fadiout, Senegal",
+       subtitle = "Date: {frame_along}") +
+  scale_color_viridis_c() +
+  transition_reveal(along = date2)
+
+animate(Sanne_Path_Anim, fps = 7)
+```
