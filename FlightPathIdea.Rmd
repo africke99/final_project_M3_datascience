@@ -1,0 +1,84 @@
+title: 'Final Project'
+author: "Carolina, Aldric, and Augusta"
+output: 
+  html_document:
+    keep_md: TRUE
+    toc: TRUE
+    toc_float: TRUE
+    df_print: paged
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r}
+library(tidyverse)     # for data cleaning and plotting
+library(gardenR)       # for Lisa's garden data
+library(lubridate)     # for date manipulation
+library(openintro)     # for the abbr2state() function
+library(palmerpenguins)# for Palmer penguin data
+library(maps)          # for map data
+library(ggmap)         # for mapping points on maps
+library(gplots)        # for col2hex() function
+library(RColorBrewer)  # for color palettes
+library(sf)            # for working with spatial data
+library(leaflet)       # for highly customizable mapping
+library(ggthemes)      # for more themes (including theme_map())
+library(plotly)        # for the ggplotly() - basic interactivity
+library(gganimate)     # for adding animation layers to ggplots
+library(transformr)    # for "tweening" (gganimate)
+library(babynames)    # baby names
+#library(gifski)        # need the library for creating gifs but don't need to load each time
+library(shiny)         # for creating interactive apps
+theme_set(theme_minimal())
+```
+
+```{r}
+UNKNOWNmap <-get_stamenmap(
+    bbox = c(left = -17, bottom = 14, right = 5, top = 51),
+    maptype = "terrain",
+    zoom = 5)
+```
+
+
+```{r, echo = FALSE}
+bird_migration <- read_csv("bird_migration.csv") %>% 
+  select(-X1) 
+
+paths <- bird_migration %>% 
+  mutate(date2 = date_time) %>% 
+  tidyr::separate(date_time, c("date", "time"), sep = " ") %>% 
+  filter(date <  "2014-01-30") %>% 
+  select(-device_info_serial) %>% 
+  mutate(min_lat = min(latitude)) %>%      #min = 14
+  mutate(max_lat = max(latitude)) %>%      #max = 51
+  mutate(min_long = min(longitude)) %>%    #min = -17
+  mutate(max_long = max(longitude))        #max = 5
+
+
+path_test_gganim <- ggmap(UNKNOWNmap)+
+    geom_path(data = paths,
+              aes(x = longitude,
+                 y = latitude,
+                 color = bird_name
+                 ))+
+  scale_color_manual(values = c("Nico" = "#660066",
+                             "Sanne" = "#CC0066",
+                             "Eric" = "3399FF"))+
+  geom_point(data = paths,
+              aes(x = longitude,
+                 y = latitude,
+                 color = bird_name
+                 ))+
+  scale_color_manual(values = c("Nico" = "#660066",
+                             "Sanne" = "#CC0066",
+                             "Eric" = "3399FF"))+
+  
+    labs(title = "Path Test",
+         subtitle = "Time: {frame_along}")+
+  
+  transition_reveal(date2)
+animate(path_test_gganim, nframes = 200)
+```
