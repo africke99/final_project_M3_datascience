@@ -53,10 +53,12 @@ The data spans from August 2013 to April 2014 and covers many countries. This br
 ## Flight Paths
 ![](orangedots.PNG)
 
+<p style="font-family: Helvetica, Sans-serif;color:#993399">sample</p>
+
 ## Flight Altitude
 ![](rosedots.PNG)
 
- <p style="font-family: Helvetica, Sans-serif;color:#993399">In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.</p>
+In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.
   
 ### Eric's January Data
 ```{r, eval = FALSE, echo = FALSE}
@@ -89,7 +91,7 @@ EricAltJan_gganim <- ggmap(Morroco)+
               aes(x = longitude,
                  y = latitude,
                  color = altitude))+
-  scale_color_gradient(high = '#660066', low = '#FF0000')+
+  scale_color_gradient(high = '#FF6600', low = '#660066')+
   geom_point(data = Eric_Alt_Jan,
              aes(x = longitude,
                  y = latitude),
@@ -109,8 +111,8 @@ anim_save("EricAltJan.gif")
 
 
 ```{r, echo = FALSE}
-g1 <- knitr::include_graphics("EricAltJan.gif")
-g2 <- 
+knitr::include_graphics("EricAltJan.gif")
+ 
 ```
 
 Eric's altitude during the first week of January was between -246 ft and 92 ft. His flight pattern shows that he flies at a low altitude when he heads towards a destination at sea. He then returns to land at a higher flight altitude. This makes sense because sea levels are lower than land and there are less obstacles to fly over. His altitude patterns may be a tool to conserve energy.
@@ -133,7 +135,7 @@ EricAltMarch_gganim <- ggmap(Morroco)+
               aes(x = longitude,
                  y = latitude,
                  color = altitude))+
-  scale_color_gradient(high = '#660066', low = '#FF0000')+
+  scale_color_gradient(high = '#FF6600', low = '#660066')+
   geom_point(data = Eric_Alt_March,
              aes(x = longitude,
                  y = latitude),

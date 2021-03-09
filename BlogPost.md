@@ -39,13 +39,7 @@ The data spans from August 2013 to April 2014 and covers many countries. This br
 
 
 
-
-```
-## Error: <text>:3:0: unexpected end of input
-## 1: g1 <- knitr::include_graphics("EricAltJan.gif")
-## 2: g2 <- 
-##   ^
-```
+![](EricAltJan.gif)<!-- -->
 
 Eric's altitude during the first week of January was between -246 ft and 92 ft. His flight pattern shows that he flies at a low altitude when he heads towards a destination at sea. He then returns to land at a higher flight altitude. This makes sense because sea levels are lower than land and there are less obstacles to fly over. His altitude patterns may be a tool to conserve energy.
 
