@@ -36,6 +36,61 @@ library(shiny)         # for creating interactive apps
 theme_set(theme_minimal())
 ```
 
+```{r}
+FRANCE <-get_stamenmap(
+    bbox = c(left = -8.6, bottom = 42.066, right = 9.141, top = 52),
+    maptype = "terrain",
+    zoom = 5)
+```
+
+```{r}
+WHOLEFLIGHT <-get_stamenmap(
+    bbox = c(left = -17, bottom = 14, right = 5, top = 51),
+    maptype = "terrain",
+    zoom = 5)
+```
+
+```{r, echo = FALSE}
+bird_migration <- read_csv("bird_migration.csv") %>% 
+  select(-X1) 
+
+paths <- bird_migration %>% 
+  mutate(date2 = date_time) %>% 
+  tidyr::separate(date_time, c("date", "time"), sep = " ") %>% 
+  filter(date <  "2013-11-30") %>% 
+  select(-device_info_serial) %>% 
+  mutate(min_lat = min(latitude)) %>%      #min = 14
+  mutate(max_lat = max(latitude)) %>%      #max = 51
+  mutate(min_long = min(longitude)) %>%    #min = -17
+  mutate(max_long = max(longitude))        #max = 5
+
+#JUST CHANGE THE GGMAP INPUT FOR SCALE
+#path_test_gganim <- ggmap(WHOLEFLIGHT)+
+path_test_gganim <- ggmap(FRANCE)+
+    geom_path(data = paths,
+              aes(x = longitude,
+                 y = latitude,
+                 color = bird_name
+                 ))+
+  scale_color_manual(values = c("Nico" = "#660066",
+                             "Sanne" = "#CC0066",
+                             "Eric" = "3399FF"))+
+  geom_point(data = paths,
+              aes(x = longitude,
+                 y = latitude,
+                 color = bird_name
+                 ))+
+  scale_color_manual(values = c("Nico" = "#660066",
+                             "Sanne" = "#CC0066",
+                             "Eric" = "3399FF"))+
+  
+    labs(title = "Path Test",
+         subtitle = "Time: {frame_along}")+
+  
+  transition_reveal(date2)
+animate(path_test_gganim, nframes = 200)
+anim_save("bigPaths")
+```
 
 ```{r, echo = FALSE}
 
