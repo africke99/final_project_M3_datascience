@@ -9,7 +9,7 @@ output:
     df_print: paged
     code_download: true
 ---
-![](NSE.jpg)
+![](seagull-sunset-gravityx-designs.jpg)
 
 ```{r setup, include=FALSE, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
@@ -51,7 +51,7 @@ The data spans from August 2013 to April 2014 and covers many countries. This br
 
 ## Flight Altitude
 
-  In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant. 
+ <p style="font-family: garamond, serif;color:#993399">In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.</p>
   
 ### Eric's January Data
 ```{r, eval = FALSE, echo = FALSE}
