@@ -28,10 +28,12 @@ The data spans from August 2013 to April 2014 and covers many countries. This br
 ## Flight Paths
 ![](orangedots.PNG)
 
+<p style="font-family: Helvetica, Sans-serif;color:#993399">sample</p>
+
 ## Flight Altitude
 ![](rosedots.PNG)
 
- <p style="font-family: Helvetica, Sans-serif;color:#993399">In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.</p>
+In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.
   
 ### Eric's January Data
 
