@@ -58,7 +58,7 @@ The data spans from August 2013 to April 2014 and covers many countries along th
 
 
 ```{r, echo = FALSE}
-FRANCE <-get_stamenmap(
+FRANCE <- get_stamenmap(
     bbox = c(left = -.622, bottom = 48.6, right = 6.3, top = 50.6),
     maptype = "terrain",
     zoom = 7)
@@ -115,7 +115,7 @@ knitr::include_graphics("FRANCE_gif.gif")
 
 
 ```{r, echo = FALSE}
-WHOLEFLIGHT <-get_stamenmap(
+WHOLEFLIGHT <- get_stamenmap(
     bbox = c(left = -17, bottom = 14, right = 5, top = 51),
     maptype = "terrain",
     zoom = 5)
