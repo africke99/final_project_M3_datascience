@@ -57,8 +57,8 @@ The data spans from August 2013 to April 2014 and covers many countries along th
 **A Late Summer in France**
 
 
-```{r, echo = FALSE}
-FRANCE <-get_stamenmap(
+```{r, eval = FALSE, echo = FALSE}
+FRANCE <- get_stamenmap(
     bbox = c(left = -.622, bottom = 48.6, right = 6.3, top = 50.6),
     maptype = "terrain",
     zoom = 7)
@@ -114,8 +114,8 @@ knitr::include_graphics("FRANCE_gif.gif")
 **Eric, Nico and Sanne's 2013 Flight Paths**
 
 
-```{r, echo = FALSE}
-WHOLEFLIGHT <-get_stamenmap(
+```{r, eval = FALSE, echo = FALSE}
+WHOLEFLIGHT <- get_stamenmap(
     bbox = c(left = -17, bottom = 14, right = 5, top = 51),
     maptype = "terrain",
     zoom = 5)
@@ -133,7 +133,7 @@ WHOLEFLIGHTpathdates <- bird_migration %>%
   mutate(min_long = min(longitude)) %>%    #min = -17
   mutate(max_long = max(longitude))        #max = 5
 
-WHOLEFLIGHT_anim <- ggmap(FRANCE)+
+WHOLEFLIGHT_anim <- ggmap(WHOLEFLIGHT)+
     geom_path(data = WHOLEFLIGHTpathdates,
               aes(x = longitude,
                  y = latitude,
@@ -273,3 +273,56 @@ Eric's altitude in the first week of March was between -438 ft and 317 ft. This 
 
 ## Flight Speed
 ![](yellowdots.PNG)
+
+```{r, eval = FALSE, echo = FALSE}
+
+bird_migration1 <- bird_migration %>% 
+  mutate(date2 = date_time) %>% 
+  select(-device_info_serial) %>% 
+  separate(date_time, c("date", "time"), sep = " ") %>% 
+  mutate(date_tag = date) %>% 
+  separate(date_tag,
+           c("Year", "Month", "Day")) %>%
+  mutate(Day = as.numeric(Day)) %>% 
+  filter(bird_name == "Sanne", Month == "01", Day <= 7) %>% 
+  rename(Speed = speed_2d) %>% 
+  mutate(min_lat = min(latitude), #13.88409
+         max_lat = max(latitude), #14.14706	
+         min_long = min(longitude), #-17.0744	
+         max_long = max(longitude)) #-16.75575
+ 
+Sanne <- get_stamenmap(
+    bbox = c(left = -17.0744, bottom = 13.88409, right = -16.75575, top = 14.14706), 
+    maptype = "terrain",
+    zoom = 12)
+
+Sanne_Path_Anim <- ggmap(Sanne) + 
+  geom_path(data = bird_migration1,
+            aes(x = longitude,
+                y = latitude,
+                color = Speed)) +
+  geom_point(data = bird_migration1, 
+             aes(x = longitude,
+                 y = latitude),
+             size = 3) +
+  labs(x = "Longitude",
+       y = "Latitude",
+       title = "Sanne's Flight Path off the coast of Joal Fadiout, Senegal",
+       subtitle = "Date: {frame_along}") +
+  scale_color_gradient(high = '#000000',
+                       low = '#FFFFFF') +
+  transition_reveal(along = date2)
+
+animate(Sanne_Path_Anim, fps = 5)
+
+```
+
+
+```{r, eval = FALSE, echo = FALSE}
+anim_save("SanneFlightJan.gif")
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("SanneFlightJan.gif")
+```
+
