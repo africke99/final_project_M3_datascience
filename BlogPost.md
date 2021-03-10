@@ -22,18 +22,37 @@ output:
 ## Introduction
 ![](purpledots.PNG)
 
-Most species of seagulls are migratory birds. They change locations based on temperature, breeding seasons, and food scarcity. Two organizations, LifeWatch and Flanders Marine Institute, worked together to collect data on the flight's of gulls. They attached lighweight, solar powered GPS devices to the bird's ankles that record several data points. For more information, visit their site by clicking [here ](https://oscibio.inbo.be/blog/bird-tracking-data-published/). 
-The data spans from August 2013 to April 2014 and covers many countries. This broad range of information allows us to ask some key questions. Do seagull's travel together when migrating or do their flight patterns differ? As for the flight itself, what is a common speed and altitude for traveling seagull's? 
+Most species of seagulls are migratory birds. They change locations based on temperature, breeding season, and food scarcity. Two organizations, LifeWatch and Flanders Marine Institute, worked together to collect data on the flight's of three Lesser Black-backed Gulls. They attached lightweight, solar powered GPS devices to the bird's ankles that record several data points. For more information, visit their site by clicking [here ](https://oscibio.inbo.be/blog/bird-tracking-data-published/).
 
-## Flight Paths
+The data spans from August 2013 to April 2014 and covers many countries along the outer coast of Eastern Europe and the NorthEast of Africa. The depth of information about their flight data allows us to ask some key questions. Did these seagull's travel together when migrating or do their flight patterns differ? As for the flight itself, what is a common speed and altitude for traveling seagull's? 
+
+## Eric, Nico, and Sanne's 2013 Journies 
 ![](orangedots.PNG)
 
+**A Late Summer in France**
+
+
+
+
+
+
+
+![](FRANCE_gif.gif)<!-- -->
+
+**Eric, Nico and Sanne's 2013 Flight Paths**
+
+
+
+
+
+
+![](WHOLEFLIGHT_gif.gif)<!-- -->
 <p style="font-family: Helvetica, Sans-serif;color:#993399">sample</p>
 
 ## Flight Altitude
 ![](rosedots.PNG)
 
-In this dataset, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.
+In this data set, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.
   
 ### Eric's January Data
 
@@ -57,3 +76,11 @@ Eric's altitude in the first week of March was between -438 ft and 317 ft. This 
 
 ## Flight Speed
 ![](yellowdots.PNG)
+
+
+
+
+
+
+![](SanneFlightJan.gif)<!-- -->
+
