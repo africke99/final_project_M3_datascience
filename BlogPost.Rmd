@@ -94,7 +94,7 @@ FRANCE_anim <- ggmap(FRANCE)+
                              "Sanne" = "#CC0066",
                              "Eric" = "3399FF"))+
   
-    labs(title = "Nico Took Off Much Earlier Than the Other Two",
+    labs(title = "Sanne Took Off Much Earlier Than the Other Two",
          subtitle = "Time: {frame_along}")+
   
   transition_reveal(date2)
