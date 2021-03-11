@@ -113,6 +113,7 @@ anim_save("FRANCE_gif.gif")
 ```{r, echo = FALSE}
 knitr::include_graphics("FRANCE_gif.gif")
 ```
+
 The gulls' data set begins with their summer in Northern France. As you can observe from the animation, the gull Sanne (pink) took off for the coast in early September, two months later Nico and Eric took off as well.  
 
 **Eric, Nico and Sanne's 2013 Flight Paths**
@@ -177,6 +178,29 @@ knitr::include_graphics("WHOLEFLIGHT_gif.gif")
 
 ## Flight Altitude
 ![](rosedots.PNG)
+
+```{r, echo = FALSE}
+bird_migration <- read_csv("bird_migration.csv") %>% 
+  select(-X1) 
+EricAverageAlt <- bird_migration %>% 
+  filter(bird_name == "Eric") %>% 
+  mutate(total_alt = sum(altitude)) %>% 
+  mutate(avg_alt = 1192637/19795)
+#Eric's Average Altitude was 60.24941 ft
+
+NicoAverageAlt <- bird_migration %>% 
+  filter(bird_name == "Nico") %>% 
+  mutate(total_alt = sum(altitude)) %>% 
+  mutate(avg_alt = 1434126/21121)
+#Nico's Average Altitude was 67.90048 ft
+
+SanneAverageAlt <- bird_migration %>% 
+  filter(bird_name == "Sanne") %>% 
+  mutate(total_alt = sum(altitude)) %>% 
+  mutate(avg_alt = 612475/21004)
+#Sanne's Average Altitude was 29.15992
+
+```
 
 In this data set, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.
   
@@ -318,17 +342,25 @@ Sanne_Path_Anim <- ggmap(Sanne) +
              aes(x = longitude,
                  y = latitude),
              size = 3) +
-  labs(x = "Longitude",
-       y = "Latitude",
+  labs(x = "", y = "",
        title = "Sanne's Flight Path off the coast of Joal Fadiout, Senegal",
        subtitle = "Date: {frame_along}") +
-  scale_color_gradient(high = '#000000',
+  scale_color_gradient(high = '#CC0066',
                        low = '#FFFFFF') +
-  transition_reveal(along = date2)+
-  theme_map()
+  theme_map() +
+  theme(legend.background = element_blank()) +
+  transition_reveal(along = date2)
 
 animate(Sanne_Path_Anim, fps = 5)
 
+
+```
+```{r, eval = FALSE, echo = FALSE}
+anim_save("SanneFlightJan.gif")
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("SanneFlightJan.gif")
 ```
 
 This data visualization shows Sanne’s flight path off the coast of Senegal during the first week of January. This area of Senegal is a dry, tropical, and sparsely populated - the perfect destination for Sanne to escape the cold and busy towns of Northern France where she otherwise stays.
@@ -338,7 +370,7 @@ Each day Sanne starts in what appears to be a protected natural area in the town
 There is only a slightly noticeable pattern in Sanne’s flight speed. While near land, she flies slowly, rarely exceeding 5 kilometers per hour. She flies the fastest when flying further into the ocean and on her return. Here she reaches speeds of 15 kph, with an average speed of 10 kph. Once far enough, she slows down to a speed of 0 to 5 kph again in order to look for prey more easily. Sometimes she’ll circle the area, but once she’s satisfied, she’ll return. Her average flight speed is 2.450434 kpm.
 
 
-```{r}
+```{r, eval = FALSE, echo = FALSE}
 bird_migration_march <- bird_migration %>% 
   mutate(date2 = date_time) %>% 
   select(-device_info_serial) %>% 
@@ -380,22 +412,19 @@ Sanne_Path_Anim_March <- ggmap(SanneMarch) +
   transition_reveal(along = date2)
 
 animate(Sanne_Path_Anim_March, fps = 5)
+```
 
+```{r, eval = FALSE, echo = FALSE}
 anim_save("SanneFlightMarch.gif")
+```
 
+```{r, echo = FALSE}
 knitr::include_graphics("SanneFlightMarch.gif")
-
 ```
 
 The data visualization for March is less insightful. Sanne flies in a similar pattern to January. She starts from the city of St Louis and flies down a peninsula only to circle back and return to the city. There seems to be plenty of food in St Louis and the surrounding bay. The exception is a long trip up a river into Mauritania and back down the coast, and a journey into the ocean that ends abruptly. Sanne rarely picks up her speed except for when she takes detours from her normal path which require her to travel longer distances. While traveling in the urban area, she does not appear to go above 10 kpm.
 
-```{r, eval = FALSE, echo = FALSE}
-anim_save("SanneFlightJan.gif")
-```
 
-```{r, echo = FALSE}
-knitr::include_graphics("SanneFlightJan.gif")
-```
 
 
 ## Conclusion
