@@ -58,7 +58,6 @@ Here is a map of the year-long flight paths of the three birds.
 
 In this data set, the altitude is measured in feet. In order to observe altitude trends, we will be comparing Eric's altitudes during the first week of January and the first week of March. It is important to observe only one bird so that we have a constant.
   
-### Eric's January Data
 
 
 
@@ -67,8 +66,6 @@ In this data set, the altitude is measured in feet. In order to observe altitude
 ![](EricAltJan.gif)<!-- -->
 
 Eric's altitude during the first week of January was between -246 ft and 92 ft. His flight pattern shows that he flies at a low altitude when he heads towards a destination at sea. He then returns to land at a higher flight altitude. This makes sense because sea levels are lower than land and there are less obstacles to fly over. His altitude patterns may be a tool to conserve energy.
-
-### Eric's March Data
 
 
 
