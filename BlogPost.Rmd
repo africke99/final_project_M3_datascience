@@ -198,7 +198,7 @@ SanneAverageAlt <- bird_migration %>%
   filter(bird_name == "Sanne") %>% 
   mutate(total_alt = sum(altitude)) %>% 
   mutate(avg_alt = 612475/21004)
-#Sanne's Average Altitude was 29.15992
+#Sanne's Average Altitude was 29.15992 ft
 
 ```
 
@@ -427,7 +427,8 @@ The data visualization for March is less insightful. Sanne flies in a similar pa
 
 
 
-## Conclusion
+## Conclusion 
+![](threebirds.PNG)
 
 **Why should *you* care about Nico, Eric, and Sanne?**
 

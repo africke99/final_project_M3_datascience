@@ -101,7 +101,8 @@ The data visualization for March is less insightful. Sanne flies in a similar pa
 
 
 
-## Conclusion
+## Conclusion 
+![](threebirds.PNG)
 
 **Why should *you* care about Nico, Eric, and Sanne?**
 
