@@ -47,16 +47,17 @@ bird_migration <- read_csv("bird_migration.csv")
 ## Introduction
 ![](purpledots.PNG)
 
-Most species of seagulls are migratory birds. They change locations based on temperature, breeding season, and food scarcity. Two organizations, LifeWatch and Flanders Marine Institute, worked together to collect data on the flight's of three Lesser Black-backed Gulls. They attached lightweight, solar powered GPS devices to the bird's ankles that record several data points. For more information, visit their site by clicking [here ](https://oscibio.inbo.be/blog/bird-tracking-data-published/).
+Ever wondered what a seagull does every day? Every month? In this data visualization you'll finally learn.  [is that too cheesy?]   Most species of seagulls are migratory birds. They change locations based on temperature, breeding season, and food scarcity. Two organizations, LifeWatch and Flanders Marine Institute, worked together to collect data on the flight's of three Lesser Black-backed Gulls. They attached lightweight, solar powered GPS devices to the bird's ankles that record several data points. For more information, visit their site by clicking [here ](https://oscibio.inbo.be/blog/bird-tracking-data-published/).
 
 The data spans from August 2013 to April 2014 and covers many countries along the outer coast of Eastern Europe and the NorthEast of Africa. The depth of information about their flight data allows us to ask some key questions. Did these seagull's travel together when migrating or do their flight patterns differ? As for the flight itself, what is a common speed and altitude for traveling seagull's? 
 
-## Eric, Nico, and Sanne's 2013 Journies 
+These gulls are primarily omnivorous. Their diet includes a wide variety of fish, insects, mollusks, crustaceans, marine worms, small birds, nestlings, eggs, rodents; also eats berries, seeds, seaweed. Sea gulls also scavenge refuse around garbage dumps.
+
+
+## Eric, Nico, and Sanne's 2013 
 ![](orangedots.PNG)
 
 **A Late Summer in France**
-
-
 ```{r, eval = FALSE, echo = FALSE}
 FRANCE <- get_stamenmap(
     bbox = c(left = -.622, bottom = 48.6, right = 6.3, top = 50.6),
@@ -95,9 +96,12 @@ FRANCE_anim <- ggmap(FRANCE)+
                              "Eric" = "3399FF"))+
   
     labs(title = "Sanne Took Off Much Earlier Than the Other Two",
-         subtitle = "Time: {frame_along}")+
+         subtitle = "Time: {frame_along}",
+         x = "Longitude",
+       y = "Latitude")+
   
-  transition_reveal(date2)
+  transition_reveal(date2)+
+  theme_map()
 
 animate(FRANCE_anim, nframes = 200)
 ```
@@ -106,13 +110,13 @@ animate(FRANCE_anim, nframes = 200)
 anim_save("FRANCE_gif.gif") 
 ```
 
-
 ```{r, echo = FALSE}
 knitr::include_graphics("FRANCE_gif.gif")
 ```
+The gulls' data set begins with their summer in Northern France. As you can observe from the animation, the gull Sanne (pink) took off for the coast in early September, two months later Nico and Eric took off as well.  
 
 **Eric, Nico and Sanne's 2013 Flight Paths**
-
+Here is a map of the year-long flight paths of the three birds.
 
 ```{r, eval = FALSE, echo = FALSE}
 WHOLEFLIGHT <- get_stamenmap(
@@ -151,10 +155,13 @@ WHOLEFLIGHT_anim <- ggmap(WHOLEFLIGHT)+
                              "Sanne" = "#CC0066",
                              "Eric" = "3399FF"))+
   
-    labs(title = "The Three Birds Traveled Thousands of Miles this Year",
+    labs(x = "Longitude",
+       y = "Latitude",title = "The Three Birds Traveled Thousands of Miles in 2013",
          subtitle = "Time: {frame_along}")+
   
-  transition_reveal(date2)
+  transition_reveal(date2)+
+  theme_map()
+  
 
 animate(WHOLEFLIGHT_anim, nframes = 200)
 ```
@@ -211,10 +218,13 @@ EricAltJan_gganim <- ggmap(Morroco)+
                  color = "#000000",
                  size = 3)+
   
-    labs(title = "Eric's Flight Altitude January",
+    labs(x = "Longitude",
+       y = "Latitude",
+      title = "Eric's Flight Altitude January",
          subtitle = "Time: {frame_along}")+
   
-  transition_reveal(date2)
+  transition_reveal(date2)+
+  theme_map()
 animate(EricAltJan_gganim, nframes = 200)
 ```
 
@@ -255,9 +265,12 @@ EricAltMarch_gganim <- ggmap(Morroco)+
                  size = 3)+
   
     labs(title = "Eric's Flight Altitude March",
+         x = "Longitude",
+          y = "Latitude",
          subtitle = "Time: {frame_along}")+
   
-  transition_reveal(date2)
+  transition_reveal(date2)+
+  theme_map()
 animate(EricAltMarch_gganim, nframes = 200)
 ```
 
@@ -311,12 +324,70 @@ Sanne_Path_Anim <- ggmap(Sanne) +
        subtitle = "Date: {frame_along}") +
   scale_color_gradient(high = '#000000',
                        low = '#FFFFFF') +
-  transition_reveal(along = date2)
+  transition_reveal(along = date2)+
+  theme_map()
 
 animate(Sanne_Path_Anim, fps = 5)
 
 ```
 
+This data visualization shows Sanne’s flight path off the coast of Senegal during the first week of January. This area of Senegal is a dry, tropical, and sparsely populated - the perfect destination for Sanne to escape the cold and busy towns of Northern France where she otherwise stays.
+ 
+Each day Sanne starts in what appears to be a protected natural area in the town of Fadiouth. She then takes flight over the Atlantic ocean, only to make a loop and return to an area by the coastal town of Palmarin. This happens each day, with trips occasionally being taken directly between Fadiouth and Palmarin. We can presume that she is going for her daily fish hunt. Since seagulls are omnivores and can also eat things that are found on land, on the days she does not fly out to sea she has probably located enough food on land. She might be bringing food back to a nest, but this does not align with her starting and ending destination being different. 
+
+There is only a slightly noticeable pattern in Sanne’s flight speed. While near land, she flies slowly, rarely exceeding 5 kilometers per hour. She flies the fastest when flying further into the ocean and on her return. Here she reaches speeds of 15 kph, with an average speed of 10 kph. Once far enough, she slows down to a speed of 0 to 5 kph again in order to look for prey more easily. Sometimes she’ll circle the area, but once she’s satisfied, she’ll return. Her average flight speed is 2.450434 kpm.
+
+
+```{r}
+bird_migration_march <- bird_migration %>% 
+  mutate(date2 = date_time) %>% 
+  select(-device_info_serial) %>% 
+  separate(date_time, c("date", "time"), sep = " ") %>% 
+  mutate(date_tag = date) %>% 
+  separate(date_tag,
+           c("Year", "Month", "Day")) %>%
+  mutate(Day = as.numeric(Day)) %>% 
+  filter(bird_name == "Sanne", Month == "03", Day <= 7) %>% 
+  rename(Speed = speed_2d) %>% 
+    mutate(min_lat = min(latitude), #15.85621
+         max_lat = max(latitude), #16.4196	
+         min_long = min(longitude), #-16.69871	
+         max_long = max(longitude)) #-16.41869
+
+SanneMarch <- get_stamenmap(
+    bbox = c(left = -16.69871, bottom = 15.85621, right = -16.41869, top = 16.4196), 
+    maptype = "terrain",
+    zoom = 12)
+
+Sanne_Path_Anim_March <- ggmap(SanneMarch) + 
+  geom_path(data = bird_migration_march,
+            aes(x = longitude,
+                y = latitude,
+                color = Speed)) +
+  geom_point(data = bird_migration_march, 
+             aes(x = longitude,
+                 y = latitude),
+             size = 3) +
+  labs(x = "",
+       y = "",
+       title = "Sanne's Flight Path off the coast of Senegal & Mauritania",
+       subtitle = "Date: {frame_along}",
+       caption = "Busiest area: St. Louis, Senegal. North of intial river spli: Mauritania") +
+  scale_color_gradient(high = '#CC0066',
+                       low = '#FFFFFF') +
+  theme_map() +
+  theme(legend.background = element_blank()) +
+  transition_reveal(along = date2)
+
+animate(Sanne_Path_Anim_March, fps = 5)
+
+anim_save("SanneFlightMarch.gif")
+
+knitr::include_graphics("SanneFlightMarch.gif")
+
+```
+
+The data visualization for March is less insightful. Sanne flies in a similar pattern to January. She starts from the city of St Louis and flies down a peninsula only to circle back and return to the city. There seems to be plenty of food in St Louis and the surrounding bay. The exception is a long trip up a river into Mauritania and back down the coast, and a journey into the ocean that ends abruptly. Sanne rarely picks up her speed except for when she takes detours from her normal path which require her to travel longer distances. While traveling in the urban area, she does not appear to go above 10 kpm.
 
 ```{r, eval = FALSE, echo = FALSE}
 anim_save("SanneFlightJan.gif")
@@ -325,4 +396,11 @@ anim_save("SanneFlightJan.gif")
 ```{r, echo = FALSE}
 knitr::include_graphics("SanneFlightJan.gif")
 ```
+
+
+## Conclusion
+
+**Why should *you* care about Nico, Eric, and Sanne?**
+
+According to Planet Experts author, Daniela Ginta, seagulls are the ["Unlikely Canaries of Climate Change](http://www.planetexperts.com/seagulls-unlikely-canaries-climate-change/). Seagull populations are declining as human populations rise. As climate change warms Earth's seas, the ocean goes through acidification, and humans continue to overfish, the gulls are faced with reduction in their sea sourced food. This is causing sea gulls to find more food from human garbage. Seagulls are not currently threatened by extinction, however, if such a hardy and world-wide species is threatened by climate change -- we as humans have a duty to change ways. This begins with reducing fossil fuel use. 
 
