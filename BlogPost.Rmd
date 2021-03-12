@@ -49,16 +49,15 @@ bird_migration <- read_csv("bird_migration.csv")
 
 The seagull swoops down gracefully, breaking the surface of the water with its beak. It catches a small fish and settles down on a bank to eat its meal. Today, the seagull did not have to travel far for its meal. As the months get colder, it will have to make a long journey so that it can survive.
 
-Most species of seagulls are migratory birds. They change locations based on temperature, breeding season, and food scarcity. Two organizations, LifeWatch and Flanders Marine Institute, worked together to collect data on the flight’s of three Lesser Black-backed Gulls. Lightweight, solar powered GPS devices were attached to the bird’s ankles that recorded data for almost two years. For detailed information about the dataset and how studies were conducted, visit Open Science Lab for Biodiversity’s website [here](https://oscibio.inbo.be/blog/bird-tracking-data-published/).
+Most species of seagulls are migratory birds. They change locations based on temperature, breeding season, and food scarcity. Two organizations, LifeWatch and Flanders Marine Institute, worked together to collect data on the flights of three Lesser Black-backed Gulls. Lightweight, solar powered GPS devices were attached to the bird’s ankles that recorded data for almost two years. For detailed information about the dataset and how studies were conducted, visit Open Science Lab for Biodiversity’s website [here](https://oscibio.inbo.be/blog/bird-tracking-data-published/).
 
 The data collected spans from August 2013 to April 2014 and covers countries along the outer coast of Eastern Europe and Northeastern Africa. The depth of information on their flight data allows us to ask some key questions. Did these three seagull’s travel together when migrating or do their flight patterns differ drastically? As for the flight itself, what is a common speed and altitude for traveling seagulls?
 
 It is important to note that seagulls stay close to water sources, as they are primarily omnivorous. Their diet includes a wide variety of fish, insects, mollusks, crustaceans, marine worms, small birds, nestlings, eggs, rodents. They also eat plants such as berries, seeds, and seaweed. If necessary, they scavenge for refuse around garbage dumps.
 
 
-## Eric, Nico, and Sanne's 2013 
+## Flight Path 
 ![](orangedots.PNG)
-**A Late Summer in France**
 
 The gulls’ data set begins with them dwelling for the summer in Northern France. European Lesser Black-backed gulls begin their mating season in early summer, and it then takes about a two months for the chicks to fledge. Sanne, likely the female gull (although not specified in the metadata), spent her summer in Somme, France - as did Eric. Nico spent the summer months in between Pas de Calais, Aisne, and part of Belgium. Although, little can be speculated about the time the gulls spent in these months it is interesting to note that Sanne (pink) took off for the western coast in early September, two months earlier than Nico and Eric. Nico and Eric leave for the coast in November. Perhaps the male birds remained longer in their colonies in order to defend their territory, or because their food source was still stable.
 
@@ -104,10 +103,10 @@ FRANCE_anim <- ggmap(FRANCE)+
          subtitle = "Time: {frame_along}",
          x = " ",
          y = " ")+
-  
-  transition_reveal(date2)+
   theme(legend.background = element_blank())+
-  theme_map()
+  theme_map()+
+  transition_reveal(date2)
+  
 
 animate(FRANCE_anim, nframes = 200)
 ```
@@ -120,11 +119,7 @@ anim_save("FRANCE_gif.gif")
 knitr::include_graphics("FRANCE_gif.gif")
 ```
 
-**Eric, Nico and Sanne's 2013 Flight Paths**
-
-
 Here is a map of the year-long flight paths of the three birds.
-
 
 ```{r, eval = FALSE, echo = FALSE}
 WHOLEFLIGHT <- get_stamenmap(
@@ -211,7 +206,7 @@ ave_table <- bird_migration %>%
 
 ave_table
 ```
-<p style="font-family: Helvetica, Sans-serif;color:#993399"> </p>
+
 
 
 ## Flight Altitude
