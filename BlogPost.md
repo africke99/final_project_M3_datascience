@@ -70,25 +70,20 @@ The three seagulls had different average flight altitudes over the course of 201
 
 
 
+
+
+
+![](EricAltJan.gif)<!-- -->
+
 Eric’s altitude during the first week of January was between -246 ft and 92 ft. His flight pattern shows that he flies at a low altitude when he heads towards a destination at sea. He then returns to land at a higher flight altitude. This makes sense because sea levels are lower than land and there are less obstacles to fly over. His altitude patterns may be a tool to conserve energy.
 
 
 
 
 
-
-
-![](EricAltJan.gif)<!-- -->
-
+![](EricAltMarch.gif)<!-- -->
 
 Eric’s altitude in the first week of March was between -438 ft and 317 ft. This range is much broader than the altitudes flown at in the first week of January. Gulls fly at higher altitudes in warmer months since the prevailing winds are picking up in force. Bird’s use the strength of prevailing winds to save energy as the months get warmer. Compared to January, Eric is not traveling out to sea as much and when he does, it is not as far of a distance. This could indicate that Eric is traveling for a food source that becomes easier to catch in warmer weather, such as fish.
-
-
-
-
-
-
-![](EricAltMarch.gif)<!-- -->
 
 ## Flight Speed
 ![](yellowdots.PNG)

@@ -236,11 +236,6 @@ SanneAverageAlt <- bird_migration %>%
 #Sanne's Average Altitude was 29.15992 ft
 
 ```
-
-
-Eric’s altitude during the first week of January was between -246 ft and 92 ft. His flight pattern shows that he flies at a low altitude when he heads towards a destination at sea. He then returns to land at a higher flight altitude. This makes sense because sea levels are lower than land and there are less obstacles to fly over. His altitude patterns may be a tool to conserve energy.
-
-
 ```{r, eval = FALSE, echo = FALSE}
 
 Morroco <- get_stamenmap(
@@ -298,9 +293,7 @@ anim_save("EricAltJan.gif")
 knitr::include_graphics("EricAltJan.gif")
 ```
 
-
-Eric’s altitude in the first week of March was between -438 ft and 317 ft. This range is much broader than the altitudes flown at in the first week of January. Gulls fly at higher altitudes in warmer months since the prevailing winds are picking up in force. Bird’s use the strength of prevailing winds to save energy as the months get warmer. Compared to January, Eric is not traveling out to sea as much and when he does, it is not as far of a distance. This could indicate that Eric is traveling for a food source that becomes easier to catch in warmer weather, such as fish.
-
+Eric’s altitude during the first week of January was between -246 ft and 92 ft. His flight pattern shows that he flies at a low altitude when he heads towards a destination at sea. He then returns to land at a higher flight altitude. This makes sense because sea levels are lower than land and there are less obstacles to fly over. His altitude patterns may be a tool to conserve energy.
 
 ```{r, eval = FALSE, echo = FALSE}
 Eric_Alt_March <- bird_migration %>% 
@@ -344,6 +337,8 @@ anim_save("EricAltMarch.gif")
 ```{r, echo = FALSE}
 knitr::include_graphics("EricAltMarch.gif")
 ```
+
+Eric’s altitude in the first week of March was between -438 ft and 317 ft. This range is much broader than the altitudes flown at in the first week of January. Gulls fly at higher altitudes in warmer months since the prevailing winds are picking up in force. Bird’s use the strength of prevailing winds to save energy as the months get warmer. Compared to January, Eric is not traveling out to sea as much and when he does, it is not as far of a distance. This could indicate that Eric is traveling for a food source that becomes easier to catch in warmer weather, such as fish.
 
 ## Flight Speed
 ![](yellowdots.PNG)
