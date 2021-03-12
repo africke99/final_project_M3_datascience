@@ -190,7 +190,7 @@ Eric traveled the least in February, Nico in August, and Sanne in November.
 Eric and Nico traveled the most in April and November. Sanne in April and September.
 It is interesting to note that the months they traveled the least are all in different seasons. This likely has to do with the abundance of food available to them and their colonies, as well as the gender differences.
 
-```{r, eval = FALSE, echo = FALSE}}
+```{r, eval = FALSE, echo = FALSE}
 ave_table <- bird_migration %>% 
   mutate(date2 = date_time) %>% 
   select(-device_info_serial) %>% 
